@@ -63,16 +63,9 @@ class App extends React.Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person name={this.state.persons[0].name} age={this.state.persons[0].age}> Hobbies: Hoopin </Person>
-          <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} 
-          click={this.switchNameHandler.bind(this, 'Norman!!')}
-          changed={this.nameChangeHandler}
-          />
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
-          <Person name={this.state.persons[3].name} age={this.state.persons[3].age}/>
-          <Person name={this.state.persons[4].name} age={this.state.persons[4].age}/>
+          { this.state.persons.map((item, index) => {
+              return <Person name={item.name} age={item.age} key={index}/>
+          })}
         </div> 
       );
     }
