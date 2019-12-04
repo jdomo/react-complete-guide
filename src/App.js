@@ -6,29 +6,22 @@ import Person from './Person/Person';
 class App extends React.Component {
   state = {
     persons: [
-      {name: "Kyle", age: 33},
-      {name: "Pascal", age: 25},
-      {name: "Serge", age: 29},
-      {name: "Terence", age: 23},
-      {name: "Norm", age: 26},
+      {id: "sadsfad", name: "Kyle", age: 33},
+      {id: "xcvvcvx", name: "Pascal", age: 25},
+      {id: "errewrr", name: "Serge", age: 29},
+      {id: "dssdfdf", name: "Terence", age: 23},
+      {id: "hghgngh", name: "Norm", age: 26},
     ],
     showPersons: false
   }
 
   age = () => Math.floor(Math.random() * 40);
 
-  switchNameHandler = (newName) => {
-    // console.log('was clicked');
-    this.setState({
-      ...this.state,
-      persons: [
-        {name: "Kyle", age: 33},
-        {name: "Pascal", age: 25},
-        {name: "Serge", age: 29},
-        {name: "Terence", age: 23},
-        {name: newName, age: 27},
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();   //slice copies array (arrays are reference type)
+    const persons = [...this.state.persons]         //spread operator is an alternative to slice -- spread is more versatile (objects), slice is faster performance-wise
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
   }
 
   nameChangeHandler = (e) => {
@@ -60,11 +53,16 @@ class App extends React.Component {
     }
 
     let persons = null;
+
     if (this.state.showPersons) {
       persons = (
         <div>
-          { this.state.persons.map((item, index) => {
-              return <Person name={item.name} age={item.age} key={index}/>
+          {this.state.persons.map((item, index) => {
+              return <Person 
+                click={() => this.deletePersonHandler(index)}
+                name={item.name} 
+                age={item.age} 
+                key={item.id}/>
           })}
         </div> 
       );
