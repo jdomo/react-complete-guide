@@ -2,6 +2,7 @@
 import React from 'react';
 import './App.css';
 import Person from './Person/Person';
+import { classes } from 'istanbul-lib-coverage';
 
 class App extends React.Component {
   state = {
@@ -70,14 +71,17 @@ class App extends React.Component {
         </div> 
       );
 
-      style.backgroundColor = 'red';
-
+      
     }
+    const classes = [];
 
+    if (this.state.persons.length <= 5) classes.push('red');
+    if (this.state.persons.length <= 4) classes.push('bold');
+    
     return (
       <div className="App">
         <h1>Hi, I'm a React App!</h1>
-        <p>It me</p>
+        <p className={classes.join(' ')}>It me</p>
         <button 
         onClick={this.togglePersonsHandler}
         style={style}
