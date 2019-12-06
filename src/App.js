@@ -19,7 +19,7 @@ class App extends React.Component {
 
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();   //slice copies array (arrays are reference type)
-    const persons = [...this.state.persons]         //spread operator is an alternative to slice -- spread is more versatile (objects), slice is faster performance-wise
+    const persons = [...this.state.persons];      //spread operator is an alternative to slice -- spread is more versatile (objects), slice is faster performance-wise
     persons.splice(personIndex, 1);
     this.setState({persons: persons})
   }
@@ -47,9 +47,8 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state, '<--state');
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
       font: 'inherit',
       border: '1px solid',
       padding: '8px'
@@ -59,7 +58,7 @@ class App extends React.Component {
 
     if (this.state.showPersons) {
       persons = (
-        <div>
+        <div className={this.state.persons.length > 1 ? 'italic' : 'bold'}>
           {this.state.persons.map((item, index) => {
               return <Person 
                 click={() => this.deletePersonHandler(index)}
@@ -70,6 +69,9 @@ class App extends React.Component {
           })}
         </div> 
       );
+
+      style.backgroundColor = 'red';
+
     }
 
     return (
