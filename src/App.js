@@ -5,6 +5,20 @@ import Person from './Person/Person';
 
 import styled from 'styled-components';
 
+const StyledButton = styled.button`
+  background-color: green;
+  font: inherit;
+  border: 1px solid;
+  padding: 8px;
+  &:hover {
+    background: cyan;
+    cursor: pointer;
+  }
+  @media (max-width: 800px) {
+    background: 'blue'
+  }
+`
+
 class App extends React.Component {
   state = {
     persons: [
@@ -49,16 +63,6 @@ class App extends React.Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      font: 'inherit',
-      border: '1px solid',
-      padding: '8px',
-      ':hover': {background: 'cyan'},
-      '@media (max-width: 800px)': {
-        background: 'blue'
-      }
-    }
 
     let persons = null;
 
@@ -74,10 +78,7 @@ class App extends React.Component {
                 changed={(e)=> this.nameChangeHandler(e, item.id)}/>
           })}
         </div> 
-      );
-      
-      style[':hover'] = {background: 'salmon'};
-      
+      );      
     }
     const classes = [];
 
@@ -88,10 +89,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Hi, I'm a React App!</h1>
         <p className={classes.join(' ')}>It me</p>
-        <button 
-        onClick={this.togglePersonsHandler}
-        style={style}
-        >Toggle people!</button>
+        <StyledButton onClick={this.togglePersonsHandler}>Toggle people!</StyledButton>
         {persons}
       </div>
       );
